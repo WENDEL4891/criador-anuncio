@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 
 # Configuração da página
-st.set_page_config(page_title="Gerador de Nota PMMG", page_icon="👮")
+st.set_page_config(page_title="Gerador de Nota PMMG", page_icon="👮", initial_sidebar_state="expanded")
 
 st.title("Gerador de Nota - PMMG")
 
@@ -20,13 +20,20 @@ def get_data_militar():
 # --- ÁREA DE INPUT ---
 st.sidebar.header("Cabeçalho Padrão")
 unidade = st.sidebar.text_input("Unidade", value="DIVINÓPOLIS (23° BPM/ 7ª RPM)")
-setor = st.sidebar.text_input("Setor/Cia", value="Centro/53ª Cia PM")
+opcoes_setores = ['SAO JOSE / 139 CIA','PLANALTO DIV / 139 CIA','CLAUDIO / 139 CIA','NITEROI / 142 CIA','PORTO VELHO / 142 CIA','CARMO CAJURU - SAO G DO PARA / 142 CIA','HIPERCENTRO DIV / 53 CIA','BOM PASTOR / 53 CIA','ALTO GOIAS / 53 CIA']
+
+setor = st.sidebar.selectbox(
+    label = "Setor...",
+    options = opcoes_setores
+)
+
+# setor = st.sidebar.text_input("Setor/Cia", value="Centro/53ª Cia PM")
 
 st.subheader("Dados da Ocorrência")
 
 col1, col2 = st.columns(2)
 with col1:
-    local = st.text_input("Local", placeholder="Rua Itapecerica n. 151, Centro")
+    local = st.text_input("Local", placeholder="Av. Paraná, 1000, São José")
     # Tenta preencher a data automaticamente no formato militar
     data_hora = st.text_input("Data/Hora", value=get_data_militar())
 
@@ -34,9 +41,11 @@ with col2:
     natureza = st.text_input("Natureza", placeholder="C01. 157 - Roubo consumado...")
     reds = st.text_input("REDS", placeholder="2026-000...")
 
-preso = st.text_area("Preso(s)", height=68, placeholder="⛓️ Nome, idade...", help="Os dados aparecerão na frente do título.")
+preso = st.text_area("Preso(s)", height=68, placeholder="🔗 Nome, idade, passagens...")
 
-sintese = st.text_area("Síntese", height=200, placeholder="Cole o histórico aqui...")
+produtividade = st.text_area("Produtividade", height=68, placeholder="2 presos...")
+
+sintese = st.text_area("Síntese", height=200, placeholder="Em patrulhamento, abordamos o autor em atitude suspeita (resumo do fato)...", help="Resumo do histórico da ocorrência")
 
 st.subheader("Guarnições")
 guarnicoes = st.text_area("Lista de Viaturas", height=150, 
@@ -71,18 +80,23 @@ def gerar_texto():
 
 🗓️ *DATA/HORA:* {data_hora}
 
-🔗 *PRESO:* {txt_preso}
+🔗 *PRESO(S):*
+{txt_preso}
+
+*PRODUTIVIDADE*
+{produtividade}
 
 📜 *SÍNTESE*: 
 {sintese}
 
 *REDS:* {reds}
 
+*EQUIPES:*
 {txt_guarnicoes}
 
-“RELEASE INTERNO, NÃO AUTORIZADO SUA REPRODUÇÃO AO PÚBLICO EXTERNO À PMMG”.
+_“RELEASE INTERNO, NÃO AUTORIZADO SUA REPRODUÇÃO AO PÚBLICO EXTERNO À PMMG”_.
 
-_*Polícia Militar de Minas Gerais, rumo aos 250 anos!!!*_"""
+_*POLÍCIA MILITAR DE MINAS GERAIS: 250 ANOS. A FORÇA DO POVO MINEIRO. PRESENÇA QUE PROTEGE.*_"""
     return texto_final
 
 # --- ÁREA DE OUTPUT ---
