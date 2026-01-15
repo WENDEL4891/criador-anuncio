@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 
 # Configuração da página
-st.set_page_config(page_title="Gerador de Nota PMMG", page_icon="👮", initial_sidebar_state="expanded")
+st.set_page_config(page_title="Criador de Anúncios", page_icon="👮", initial_sidebar_state="expanded")
 
 st.title("Criador de anúncios")
 
