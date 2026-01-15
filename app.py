@@ -4,7 +4,7 @@ from datetime import datetime
 # Configuração da página
 st.set_page_config(page_title="Gerador de Nota PMMG", page_icon="👮", initial_sidebar_state="expanded")
 
-st.title("Gerador de Nota - PMMG")
+st.title("Criador de anúncios")
 
 # --- FUNÇÃO AUXILIAR PARA DATA (Formato PMMG) ---
 def get_data_militar():
@@ -18,7 +18,7 @@ def get_data_militar():
     return data_fmt
 
 # --- ÁREA DE INPUT ---
-st.sidebar.header("Cabeçalho Padrão")
+st.sidebar.header("Cabeçalho")
 unidade = st.sidebar.text_input("Unidade", value="DIVINÓPOLIS (23° BPM/ 7ª RPM)")
 opcoes_setores = ['SAO JOSE / 139 CIA','PLANALTO DIV / 139 CIA','CLAUDIO / 139 CIA','NITEROI / 142 CIA','PORTO VELHO / 142 CIA','CARMO CAJURU - SAO G DO PARA / 142 CIA','HIPERCENTRO DIV / 53 CIA','BOM PASTOR / 53 CIA','ALTO GOIAS / 53 CIA']
 
